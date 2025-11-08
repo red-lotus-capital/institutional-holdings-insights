@@ -1,12 +1,18 @@
-# Environment variables
-.env
-
-# Python
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+
+# C extensions
 *.so
-.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Distribution / packaging
 build/
 develop-eggs/
 dist/
@@ -18,35 +24,39 @@ lib64/
 parts/
 sdist/
 var/
-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-PIPFILE.lock
 
-# Virtual environments
-venv/
-env/
-ENV/
+# PyInstaller
+*.spec
 
-# IDE
+# Unit test / coverage reports
+.coverage
+coverage.xml
+htmlcov/
+.cache/
+pytest_cache/
+.tox/
+.nox/
+
+# IDE/editor
 .vscode/
 .idea/
 *.swp
-*.swo
-*~
 
-# OS
+# macOS
 .DS_Store
-Thumbs.db
-
-# Data files
-data/*.json
-data/*.csv
 
 # Logs
 *.log
-logs/
 
-# Chrome driver
-chromedriver*
+# Jupyter
+.ipynb_checkpoints/
+
+# Local config
+.env
+
+# Data outputs (keep placeholder)
+data/*
+!data/.gitkeep
