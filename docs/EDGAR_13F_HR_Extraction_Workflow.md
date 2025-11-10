@@ -21,8 +21,8 @@ This guide explains how to go from EDGAR filing links to a clean, structured Exc
   - `scrape_edgar_links.py` — Python module that powers the scraping logic.
   - `extract_13F_HR.py` — Python module that parses the submission text and writes the Excel workbook.
 - `data/edgar_links/` — default location for input Excel files with filing links.
-- `data/raw_13F_HR/` — target for downloaded submission `.txt` files (e.g., `data/raw_13F_HR/blackrock/`).
-- `data/extracted_13F_HR/` — target for generated Excel workbooks.
+- `data/raw_13F_HR/` — target for downloaded submission `.txt` files (e.g., `data/raw_13F_HR/blackrock/`, `data/raw_13F_HR/vanguard/`).
+- `data/extracted_13F_HR/` — target for generated Excel workbooks (e.g., `data/extracted_13F_HR/blackrock/`, `data/extracted_13F_HR/vanguard/`).
 
 ## Prepare Filing Links Excel
 - Create or place an Excel file in `data/edgar_links` with rows for filings.
@@ -62,10 +62,15 @@ This guide explains how to go from EDGAR filing links to a clean, structured Exc
 ## End‑to‑End Example
 - Scrape filings listed in `blackrock.xlsx`:
   - `./scripts/scrape_edgar_links.sh blackrock.xlsx`
-- Generate workbook for a specific period:
+- Scrape filings listed in `vanguard.xlsx`:
+  - `./scripts/scrape_edgar_links.sh vanguard.xlsx`
+- Generate workbook for a specific period (BlackRock):
   - `./scripts/extract_13F_HR.sh data/raw_13F_HR/blackrock/20240930.txt`
-- Verify output exists:
+- Generate workbook for a specific period (Vanguard):
+  - `./scripts/extract_13F_HR.sh data/raw_13F_HR/vanguard/20240930.txt`
+- Verify outputs exist:
   - `ls data/extracted_13F_HR/blackrock/20240930.xlsx`
+  - `ls data/extracted_13F_HR/vanguard/20240930.xlsx`
 
 ## Options and Behavior
 - Default folder for filing links: `data/edgar_links`.
@@ -88,7 +93,7 @@ This guide explains how to go from EDGAR filing links to a clean, structured Exc
 
 ## Customization
 - Support additional issuers:
-  - The scraper currently routes BlackRock files to `data/raw_13F_HR/blackrock`. To add others, extend the routing logic in `src/data_extraction/scrape_edgar_links.py` (e.g., map filename keywords to target subfolders).
+  - The scraper routes issuer files based on the Excel filename (e.g., `blackrock.xlsx` → `data/raw_13F_HR/blackrock`, `vanguard.xlsx` → `data/raw_13F_HR/vanguard`). To add others, extend the routing logic in `src/data_extraction/scrape_edgar_links.py` by mapping filename keywords to target subfolders.
 - Skip existing files:
   - Add a switch to the shell script and processor to skip or overwrite based on preference.
 - Verbose logging:

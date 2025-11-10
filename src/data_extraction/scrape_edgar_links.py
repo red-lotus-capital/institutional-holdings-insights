@@ -251,9 +251,11 @@ class EdgarLinksProcessor:
                 if not period:
                     result[f"error_{processed}"] = "Missing Period of Report"
                     continue
-                # Conditionally save if this Excel belongs to BlackRock
-                if "blackrock" in xlsx_path.name.lower():
-                    issuer_dir = self.raw_out_base / "blackrock"
+                # Conditionally save if this Excel belongs to a known issuer (e.g., BlackRock or Vanguard)
+                name_lower = xlsx_path.name.lower()
+                if ("blackrock" in name_lower) or ("vanguard" in name_lower):
+                    issuer = "blackrock" if "blackrock" in name_lower else "vanguard"
+                    issuer_dir = self.raw_out_base / issuer
                     _safe_mkdir(issuer_dir)
                     safe_period = re.sub(r"[^0-9]", "", period)
                     if len(safe_period) != 8:
